@@ -1,0 +1,17 @@
+{
+  "name": "reqi",
+  "version": "0.0.0",
+  "description": "Node promisified HTTP/HTTPS client requests with retries.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Running Lint...\" && standard --verbose && echo \"Lint Successful!\""
+  },
+  "author": "Michael Sterpka <github: @mster>",
+  "license": "MIT",
+  "devDependencies": {
+    "standard": "^14.3.1"
+  }
+}
