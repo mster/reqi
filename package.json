@@ -9,7 +9,10 @@
   "scripts": {
     "test": "echo \"Running Lint...\" && standard --verbose && echo \"Lint Successful!\""
   },
-  "author": "Michael Sterpka <github: @mster>",
+  "contributors": [
+    "Michael Sterpka <michaelsterpka@gmail.com> (https://github.com/mster)",
+    "Tyler Laskey <tlaskey3@gmail.com> (https://github.com/tlaskey)"
+  ],
   "license": "MIT",
   "devDependencies": {
     "standard": "^14.3.1"
