@@ -7,7 +7,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Running Lint...\" && standard --verbose && echo \"Lint Successful!\""
+    "lint": "echo \"Running Lint...\" && standard --verbose && echo \"Lint Successful!\"",
+    "test": "echo \"Running Tape Tests...\" && node tests/unit/* && echo \"Tests Succesful!\""
   },
   "contributors": [
     "Michael Sterpka <michaelsterpka@gmail.com> (https://github.com/mster)",
