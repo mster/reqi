@@ -1,7 +1,6 @@
 'use strict'
 
 var test = require('tape')
-var debug = require('../../lib/debug')
 const ReqiError = require('../../lib/error')
 
 const {
