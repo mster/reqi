@@ -1,8 +1,8 @@
 'use strict'
 
-var test = require('tape')
+const test = require('tape')
 const ReqiError = require('../../lib/error')
-var ClientRequest = require('../../lib/client')
+const ClientRequest = require('../../lib/client')
 
 test('creating ClientRequest should create a reqiOptions object containing defaults', function(t) {
     let client = new ClientRequest()
