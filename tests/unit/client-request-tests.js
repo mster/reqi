@@ -2,10 +2,10 @@
 
 const test = require('tape')
 const ReqiError = require('../../lib/error')
-const ClientRequest = require('../../lib/client')
+const ReqiRequest = require('../../lib/client')
 
-test('creating ClientRequest should create a reqiOptions object containing defaults', function(t) {
-    let client = new ClientRequest()
+test('creating ReqiRequest should create a reqiOptions object containing defaults', function(t) {
+    let client = new ReqiRequest()
     const actual = client.reqiOptions
     const expected = {
       redirect: false,
@@ -19,11 +19,11 @@ test('creating ClientRequest should create a reqiOptions object containing defau
     t.end()
 })
 
-test('creating ClientRequest with initOptions should create a reqiOptions object containing modified defaults', function(t) {
+test('creating ReqiRequest with initOptions should create a reqiOptions object containing modified defaults', function(t) {
     const initOptions = {
         redirect: true
     }
-    let client = new ClientRequest(initOptions)
+    let client = new ReqiRequest(initOptions)
     const actual = client.reqiOptions
     const expected = {
       redirect: true,
