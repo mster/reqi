@@ -2,7 +2,7 @@
 
 const test = require('tape')
 const ReqiError = require('../../lib/error')
-const MockEndpoint = require('../../lib/mock-endpoint')
+const MockEndpoint = require('./mock-endpoint')
 const ReqiClient = require('../../lib/client')
 
 
