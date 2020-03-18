@@ -38,7 +38,6 @@ tape('An invalid request should return ReqiError', function(t) {
     t.end()
 })
 
-
 tape('cleanup', function (t) {
     server.close(t.end)
 })
