@@ -6,7 +6,8 @@ const http = require('http')
 let server
 
 tape('setup', function(t) {
-    server = http.createServer((req, res) => {
+    server = http.createServer()
+    server.on('request', (req, res) => {
         res.writeHead(200)
         req.pipe(res)
     })
