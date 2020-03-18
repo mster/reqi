@@ -29,8 +29,7 @@ tape('A request should return success status code', function(t) {
 
 tape('An invalid request should return ReqiError', function(t) {
     const client = new ReqiClient()
-    const requestOptions = {url: 'http://localhost:9999', method: 'GET'}
-    const request = client.request(requestOptions).then((response) => {
+    const request = client.request('http://localhost:9999').then((response) => {
         t.fail(response)
     }).catch((error) => {
         t.equal('ReqiError', error.name)
