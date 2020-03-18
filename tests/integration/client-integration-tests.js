@@ -1,26 +1,26 @@
 'use strict'
 
-const test = require('tape')
-const ReqiError = require('../../lib/error')
+const tape = require('tape')
 const ReqiClient = require('../../lib/client')
 const http = require('http')
 let server
 
 
-test('setup', function(t) {
-    server = http.createServer()
-    server.on('request', (req, res) => {
+tape('setup', function(t) {
+    server = http.createServer((req, res) => {
         res.writeHead(200)
         req.pipe(res)
     })
-    server.listen(3000, 'localhost')
-    console.log('Listening on port 3000...')
-    t.end()
+    server.listen(3000, () => {
+        console.log('Listening on port 3000...')
+        t.end()
+    })
 })
 
-test('A request should return success status code', function(t) {
+tape('A request should return success status code', function(t) {
     const client = new ReqiClient()
-    const request = client.request('http://localhost:3000').then((response) => {
+    const requestOptions = {url: 'http://localhost:3000', method: 'GET'}
+    const request = client.request(requestOptions).then((response) => {
         t.equal(200, response.statusCode)
     }).catch((error) => {
         t.fail(error)
@@ -28,9 +28,10 @@ test('A request should return success status code', function(t) {
     t.end()
 })
 
-test('An invalid request should return ReqiError', function(t) {
+tape('An invalid request should return ReqiError', function(t) {
     const client = new ReqiClient()
-    const request = client.request('http://localhost:9999').then((response) => {
+    const requestOptions = {url: 'http://localhost:9999', method: 'GET'}
+    const request = client.request(requestOptions).then((response) => {
         t.fail(response)
     }).catch((error) => {
         t.equal('ReqiError', error.name)
@@ -39,6 +40,6 @@ test('An invalid request should return ReqiError', function(t) {
 })
 
 
-test('cleanup', function (t) {
+tape('cleanup', function (t) {
     server.close(t.end)
 })
