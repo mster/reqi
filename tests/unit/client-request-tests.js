@@ -6,7 +6,7 @@ const ReqiRequest = require('../../lib/client')
 
 test('creating ReqiRequest should create a reqiOptions object containing defaults', function(t) {
     let client = new ReqiRequest()
-    const actual = client.reqiOptions
+    const actual = client.clientOptions
     const expected = {
       redirect: false,
       redirectCount: 0,
@@ -24,7 +24,7 @@ test('creating ReqiRequest with initOptions should create a reqiOptions object c
         redirect: true
     }
     let client = new ReqiRequest(initOptions)
-    const actual = client.reqiOptions
+    const actual = client.clientOptions
     const expected = {
       redirect: true,
       redirectCount: 0,
