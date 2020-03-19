@@ -5,6 +5,7 @@ const ReqiClient = require('../../lib/client')
 const http = require('http')
 let server
 
+<<<<<<< HEAD
 tape('setup', function(t) {
     server = http.createServer((req, res) => {
         res.writeHead(200)
@@ -14,6 +15,18 @@ tape('setup', function(t) {
         server.url = 'http://localhost:' + server.address().port
         t.end()
     })
+=======
+tape('setup', function (t) {
+  server = http.createServer()
+  server.on('request', (req, res) => {
+    res.writeHead(200)
+    req.pipe(res)
+  })
+  server.listen(3000, () => {
+    server.url = 'http://localhost:' + server.address().port
+    t.end()
+  })
+>>>>>>> c8587fb31fc56a5dba8f4008c2f5b8ce964f5be6
 })
 
 tape('A request should return success status code', function (t) {
