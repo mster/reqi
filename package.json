@@ -8,7 +8,7 @@
   },
   "scripts": {
     "lint": "echo \"Running Lint...\" && standard --verbose && echo \"Lint Successful!\"",
-    "test": "npm run unit && npm run integration",
+    "test": "npm run lint && npm run unit && npm run integration",
     "unit": "echo \"Running Tape Unit Tests...\" && node ./tests/unit/* && echo \"Tests Succesful!\"",
     "integration": "echo \"Running Tape Integration Tests...\" && node ./tests/integration/* && echo \"Tests Succesful!\""
   },
