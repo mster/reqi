@@ -7,7 +7,10 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Running Lint...\" && standard --verbose && echo \"Lint Successful!\""
+    "lint": "echo \"Running Lint...\" && standard --verbose && echo \"Lint Successful!\"",
+    "test": "npm run lint && npm run unit && npm run integration",
+    "unit": "echo \"Running Tape Unit Tests...\" && node ./tests/unit/* && echo \"Tests Succesful!\"",
+    "integration": "echo \"Running Tape Integration Tests...\" && node ./tests/integration/* && echo \"Tests Succesful!\""
   },
   "contributors": [
     "Michael Sterpka <michaelsterpka@gmail.com> (https://github.com/mster)",
@@ -15,6 +18,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "standard": "^14.3.1"
+    "standard": "^14.3.3",
+    "tape": "^4.13.2"
   }
 }
