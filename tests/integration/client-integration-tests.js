@@ -20,23 +20,25 @@ tape('setup', function(t) {
 tape('A request should return success status code', function(t) {
     const client = new ReqiClient()
     const requestOptions = {url: server.url, method: 'GET'}
-    const request = client.request(requestOptions).then((response) => {
+    client.request(requestOptions).then((response) => {
         t.equal(200, response.statusCode)
+        t.end()
     }).catch((error) => {
         t.fail(error)
+        t.end()
     })
-    t.end()
 })
 
 tape('An invalid request should return ReqiError', function(t) {
     const client = new ReqiClient()
     const requestOptions = {url: 'http://localhost:9999', method: 'GET'}
-    const request = client.request(requestOptions).then((response) => {
+    client.request(requestOptions).then((response) => {
         t.fail(response)
+        t.end()
     }).catch((error) => {
         t.equal('ReqiError', error.name)
+        t.end()
     })
-    t.end()
 })
 
 tape('cleanup', function (t) {
