@@ -46,7 +46,7 @@ test('header should return a Number if the field is numeric', function (t) {
 test('generateOptions should return a ReqiError if requestOptions is not present', function (t) {
   const requestOptions = {}
   const actual = generateOptions(requestOptions)
-  const expected = new ReqiError('Error: options.url is required.', requestOptions)
+  const expected = { error: new ReqiError('Error: url unspecified.') }
   t.deepEqual(actual, expected)
   t.end()
 })
@@ -56,7 +56,7 @@ test('generateOptions should return a ReqiError is url is not present', function
     contentType: 'application/json'
   }
   const actual = generateOptions(requestOptions)
-  const expected = new ReqiError('Error: options.url is required.', requestOptions)
+  const expected = { ...requestOptions, error: new ReqiError('Error: url unspecified.') }
   t.deepEqual(actual, expected)
   t.end()
 })
@@ -66,7 +66,7 @@ test('generateOptions should return a ReqiError if url is invalid', function (t)
     url: 'googlecom'
   }
   const actual = generateOptions(requestOptions)
-  const expected = new ReqiError('Error: invalid url.')
+  const expected = { ...requestOptions, error: new ReqiError('TypeError [ERR_INVALID_URL]: Invalid URL: googlecom') }
   t.deepEqual(actual, expected)
   t.end()
 })
@@ -79,12 +79,16 @@ test('generateOptions should return options if given valid requestOptions and ad
     method: 'GET'
   }
   const options = {
-    url: 'https://google.com/test',
+    protocol: 'https:',
     method: 'GET',
+    url: 'https://google.com/test',
     hostname: 'google.com',
-    port: '',
+    port: 443,
     path: '/test',
-    protocol: 'https:'
+    headers: {},
+    agent: undefined,
+    reqCount: { retry: 0, redirect: 0 },
+    id: 1
   }
 
   const actual = generateOptions(requestOptions, addons)
