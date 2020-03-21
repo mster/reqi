@@ -8,11 +8,10 @@ test('creating ReqiRequest should create a reqiOptions object containing default
   const actual = client.clientOptions
   const expected = {
     redirect: false,
-    redirectCount: 0,
-    retryCodes: [408, 429, 503],
-    retryCount: 3,
-    maxWait: 15,
-    parseJSON: false
+    retry: false,
+    retryCodes: [],
+    maxWait: 3,
+    json: false
   }
   t.deepEqual(actual, expected)
   t.end()
@@ -20,17 +19,18 @@ test('creating ReqiRequest should create a reqiOptions object containing default
 
 test('creating ReqiRequest with initOptions should create a reqiOptions object containing modified defaults', function (t) {
   const initOptions = {
-    redirect: true
+    redirect: true,
+    retry: 1,
+    retryCodes: [426]
   }
   const client = new ReqiRequest(initOptions)
   const actual = client.clientOptions
   const expected = {
     redirect: true,
-    redirectCount: 0,
-    retryCodes: [408, 429, 503],
-    retryCount: 3,
-    maxWait: 15,
-    parseJSON: false
+    retry: 1,
+    retryCodes: [426],
+    maxWait: 3,
+    json: false
   }
   t.deepEqual(actual, expected)
   t.end()
