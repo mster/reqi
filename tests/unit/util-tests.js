@@ -73,10 +73,8 @@ test('generateOptions should return a ReqiError if url is invalid', function (t)
 
 test('generateOptions should return options if given valid requestOptions and addons', function (t) {
   const requestOptions = {
-    url: 'https://google.com/test'
-  }
-  const addons = {
-    method: 'GET'
+    url: 'https://google.com/test',
+    id: '77b406'
   }
   const options = {
     protocol: 'https:',
@@ -88,10 +86,10 @@ test('generateOptions should return options if given valid requestOptions and ad
     headers: {},
     agent: undefined,
     reqCount: { retry: 0, redirect: 0 },
-    id: 1
+    id: '77b406'
   }
 
-  const actual = generateOptions(requestOptions, addons)
+  const actual = generateOptions(requestOptions)
   const expected = options
   t.deepEqual(actual, expected)
   t.end()
