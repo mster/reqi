@@ -9,7 +9,7 @@ tape('setup', function (t) {
   server = http.createServer()
   let time = new Date()
   server.on('request', (req, res) => {
-    let elapsed = new Date() - time
+    const elapsed = new Date() - time
     if (elapsed > WAIT) {
       res.writeHead(200)
       res.end()
