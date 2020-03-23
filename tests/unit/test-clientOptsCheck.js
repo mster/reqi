@@ -18,7 +18,18 @@ tape('setup', function (t) {
   })
 })
 
-tape('request gives input error when supplied with invalid input of client opts', function (t) {
+tape('request gives input error when supplied with invalid redirect input of client opts', function (t) {
+  const client = new ReqiClient({ redirect: ['invalid'] })
+  client.request(server.url).then((response) => {
+    t.fail(response)
+    t.end()
+  }).catch((error) => {
+    t.deepEquals(error, new ReqiError('Error: client options contain invalid input'))
+    t.end()
+  })
+})
+
+tape('request gives input error when supplied with invalid retry input of client opts', function (t) {
   const client = new ReqiClient({ retry: new ReqiClient() })
   client.request(server.url).then((response) => {
     t.fail(response)
@@ -29,6 +40,18 @@ tape('request gives input error when supplied with invalid input of client opts'
   })
 })
 
+tape('request gives input error when supplied with invalid retryCodes input of client opts', function (t) {
+  const client = new ReqiClient({ retryCodes: new ReqiClient() })
+  client.request(server.url).then((response) => {
+    t.fail(response)
+    t.end()
+  }).catch((error) => {
+    t.deepEquals(error, new ReqiError('Error: client options contain invalid input'))
+    t.end()
+  })
+})
+
 tape('cleanup', function (t) {
-  server.close(t.end)
+  server.close()
+  t.end()
 })
