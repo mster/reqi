@@ -12,7 +12,7 @@ tape('setup', function (t) {
     res.writeHead(200)
     req.pipe(res)
   })
-  server.listen(3000, 'localhost', () => {
+  server.listen(0, 'localhost', () => {
     server.url = 'https://localhost:' + server.address().port
     t.end()
   })

@@ -3,14 +3,14 @@ const tape = require('tape')
 const ReqiClient = require('../../lib/client')
 const http = require('http')
 let server
-const WAIT = 1000 // 1 second in ms
+const WAIT = 1
 
 tape('setup', function (t) {
   server = http.createServer()
   let time = new Date()
   server.on('request', (req, res) => {
     const elapsed = new Date() - time
-    if (elapsed > WAIT) {
+    if (elapsed >= WAIT) {
       res.writeHead(200)
       res.end()
       time = new Date()
@@ -19,9 +19,8 @@ tape('setup', function (t) {
       res.end()
     }
   })
-  server.listen(3000, function () {
+  server.listen(0, function () {
     server.url = 'http://localhost:' + this.address().port
-    console.log(server.url)
     t.end()
   })
 })
