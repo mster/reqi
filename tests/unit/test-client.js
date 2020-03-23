@@ -1,10 +1,10 @@
 'use strict'
 
-const test = require('tape')
-const ReqiRequest = require('../../lib/client')
+const tape = require('tape')
+const ReqiClient = require('../../lib/client')
 
-test('creating ReqiRequest should create a reqiOptions object containing defaults', function (t) {
-  const client = new ReqiRequest()
+tape('creating Reqi Client should create a reqiOptions object containing defaults', function (t) {
+  const client = new ReqiClient()
   const actual = client.clientOptions
   const expected = {
     redirect: false,
@@ -17,13 +17,13 @@ test('creating ReqiRequest should create a reqiOptions object containing default
   t.end()
 })
 
-test('creating ReqiRequest with initOptions should create a reqiOptions object containing modified defaults', function (t) {
+tape('creating Reqi Client with initOptions should create a reqiOptions object containing modified defaults', function (t) {
   const initOptions = {
     redirect: true,
     retry: 1,
     retryCodes: [426]
   }
-  const client = new ReqiRequest(initOptions)
+  const client = new ReqiClient(initOptions)
   const actual = client.clientOptions
   const expected = {
     redirect: true,
