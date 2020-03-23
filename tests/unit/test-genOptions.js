@@ -33,7 +33,7 @@ tape('generateOptions should return a ReqiError if url is invalid', function (t)
   t.end()
 })
 
-test('generateOptions should return options if given valid requestOptions and addons', function (t) {
+tape('generateOptions should return options if given valid requestOptions and addons', function (t) {
   const transport = require('https')
   const httpsAgent = new transport.Agent({ id: '666' })
 
