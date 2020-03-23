@@ -30,15 +30,17 @@ tape('setup server', function (t) {
   })
 })
 
-tape('test redirect', function (t) {
+tape('test redirect', async function (t) {
   const client = new ReqiClient({ redirect: true, redirectCodes: 301 })
-  client.request(serverRedirect.url).then((response) => {
+  let response
+  try {
+    response = await client.request(serverRedirect.url)
     t.equals(response.statusCode, 200)
     t.end()
-  }).catch((error) => {
+  } catch (error) {
     t.fail(error)
     t.end()
-  })
+  }
 })
 
 tape('cleanup', function (t) {

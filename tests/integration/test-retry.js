@@ -3,17 +3,16 @@ const tape = require('tape')
 const ReqiClient = require('../../lib/client')
 const http = require('http')
 let server
-const WAIT = 1
+const WAIT = 1 * 1000 // wait 1000 ms
 
-tape('setup', function (t) {
+tape('setup server retry-after: 1 second', function (t) {
   server = http.createServer()
-  let time = new Date()
+  const time = new Date()
   server.on('request', (req, res) => {
-    const elapsed = new Date() - time
+    const elapsed = (new Date() - time)
     if (elapsed >= WAIT) {
       res.writeHead(200)
       res.end()
-      time = new Date()
     } else {
       res.writeHead(429, { 'retry-after': 1 })
       res.end()
@@ -25,15 +24,17 @@ tape('setup', function (t) {
   })
 })
 
-tape('retry', function (t) {
+tape('retry with retry-after set to 1 second', async function (t) {
   const client = new ReqiClient({ retry: 1, retryCodes: 429 })
-  client.get(server.url).then((response) => {
+  let response
+  try {
+    response = await client.get(server.url)
     t.equal(response.statusCode, 200)
     t.end()
-  }).catch((error) => {
+  } catch (error) {
     t.fail(error)
     t.end()
-  })
+  }
 })
 
 tape('cleanup', function (t) {
