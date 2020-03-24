@@ -20,11 +20,11 @@ tape('setup', function (t) {
 
 tape('request should reject with error on an \'abort\' event.', async function (t) {
   const client = new ReqiClient()
-  const clientOptions = { url: server.url }
+  const requestOptions = { url: server.url }
 
   let res
   try {
-    res = await client.request(clientOptions)
+    res = await client.request(requestOptions)
   } catch (error) {
     res = error
   }

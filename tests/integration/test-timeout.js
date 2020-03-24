@@ -20,11 +20,11 @@ tape('setup', function (t) {
 
 tape('setting timeout option effects socket timeout', async function (t) {
   const client = new ReqiClient()
-  const clientOptions = { timeout: 1, url: server.url }
+  const requestOptions = { timeout: 1, url: server.url }
 
   let res
   try {
-    res = await client.request(clientOptions)
+    res = await client.request(requestOptions)
   } catch (error) {
     res = error
   }
