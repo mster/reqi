@@ -9,15 +9,13 @@ tape('setup server retry-after: 1 second', function (t) {
   server = http.createServer()
   const time = new Date()
   server.on('request', (req, res) => {
-    let elapsed
+    const elapsed = (new Date() - time)
     if (elapsed >= WAIT) {
       res.writeHead(200)
       res.end()
     } else {
       res.writeHead(429, { 'retry-after': 1 })
       res.end()
-      elapsed = (new Date() - time)
-      console.log('elapsed after send 429 code:', elapsed, 'ms')
     }
   })
   server.listen(0, function () {
