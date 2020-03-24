@@ -45,7 +45,7 @@ tape('An invalid request should return ReqiError', async function (t) {
   }
 })
 
-tape('changing client options should change request behavior for subsequent requests.', async function (t) {
+tape('changing client options changes request behavior for subsequent requests', async function (t) {
   const client = new ReqiClient()
   const requestOptions = { url: server.url }
 
