@@ -1,6 +1,6 @@
 {
   "name": "reqi",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Node promisified HTTP/HTTPS client requests with retries.",
   "main": "index.js",
   "directories": {
