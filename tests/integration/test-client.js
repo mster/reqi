@@ -41,7 +41,7 @@ tape('An invalid request should return ReqiError', function (t) {
   })
 })
 
-tape('changing client options should change request behavior.', async function (t) {
+tape('changing client options should change request behavior for subsequent requests.', async function (t) {
   const client = new ReqiClient()
   const requestOptions = { url: server.url }
 
@@ -67,6 +67,25 @@ tape('changing client options should change request behavior.', async function (
 
   const actual = [firstRetry, secondRetry]
   const expected = [0, 3]
+
+  t.deepEquals(actual, expected)
+  t.end()
+})
+
+tape('client reuses agent if supplied with one', async function (t) {
+  const client = new ReqiClient()
+  const keepAgent = new http.Agent({ id: '420690' })
+  const requestOptions = { url: server.url, agent: keepAgent }
+
+  let res
+  try {
+    res = await client.request(requestOptions)
+  } catch (error) {
+    res = error
+  }
+
+  const actual = (res.requestOptions && res.requestOptions.agent && res.requestOptions.agent.options) ? res.requestOptions.agent.options.id : null
+  const expected = '420690'
 
   t.deepEquals(actual, expected)
   t.end()
