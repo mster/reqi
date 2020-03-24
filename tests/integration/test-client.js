@@ -11,34 +11,38 @@ tape('setup', function (t) {
     res.writeHead(200)
     req.pipe(res)
   })
-  server.listen(0, () => {
-    server.url = 'http://localhost:' + server.address().port
+  server.listen(0, function () {
+    server.url = 'http://localhost:' + this.address().port
     t.end()
   })
 })
 
-tape('A request should return success status code', function (t) {
+tape('A request should return success status code', async function (t) {
   const client = new ReqiClient()
   const requestOptions = { url: server.url, method: 'GET' }
-  client.request(requestOptions).then((response) => {
-    t.equal(200, response.statusCode)
+  let response
+  try {
+    response = await client.request(requestOptions)
+    t.equal(response.statusCode, 200)
     t.end()
-  }).catch((error) => {
+  } catch (error) {
     t.fail(error)
     t.end()
-  })
+  }
 })
 
-tape('An invalid request should return ReqiError', function (t) {
+tape('An invalid request should return ReqiError', async function (t) {
   const client = new ReqiClient()
   const requestOptions = { url: 'http://localhost:9999', method: 'GET' }
-  client.request(requestOptions).then((response) => {
+  let response
+  try {
+    response = await client.request(requestOptions)
     t.fail(response)
     t.end()
-  }).catch((error) => {
+  } catch (error) {
     t.equal('ReqiError', error.name)
     t.end()
-  })
+  }
 })
 
 tape('changing client options should change request behavior for subsequent requests.', async function (t) {

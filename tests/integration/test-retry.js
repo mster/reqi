@@ -24,15 +24,17 @@ tape('setup server retry-after: 1 second', function (t) {
   })
 })
 
-tape('retry with retry-after set to 1 second', function (t) {
+tape('retry with retry-after set to 1 second', async function (t) {
   const client = new ReqiClient({ retry: 1, retryCodes: 429 })
-  client.get(server.url).then((response) => {
+  let response
+  try {
+    response = await client.get(server.url)
     t.equal(response.statusCode, 200)
     t.end()
-  }).catch((error) => {
+  } catch (error) {
     t.fail(error)
     t.end()
-  })
+  }
 })
 
 tape('cleanup', function (t) {
