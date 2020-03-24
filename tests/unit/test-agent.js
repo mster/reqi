@@ -18,68 +18,76 @@ tape('setup', function (t) {
   })
 })
 
-tape('agent should be set by Reqi if agent is undefined.', function (t) {
+tape('agent should be set by Reqi if agent is undefined.', async function (t) {
   const client = new ReqiClient()
   const requestOptions = { agent: undefined, url: server.url }
 
-  client.request(requestOptions).then((response) => {
-    const actual = response.requestOptions.agent.constructor.name
-    const expected = 'Agent'
+  let res
+  try {
+    res = await client.request(requestOptions)
+  } catch (error) {
+    res = error
+  }
 
-    t.equals(actual, expected)
-    t.end()
-  }).catch((error) => {
-    t.fail(error)
-    t.end()
-  })
+  const actual = (res && res.requestOptions && res.requestOptions.agent) ? res.requestOptions.agent.constructor.name : res
+  const expected = 'Agent'
+
+  t.equals(actual, expected)
+  t.end()
 })
 
-tape('agent should be set by Reqi if agent is not supplied.', function (t) {
+tape('agent should be set by Reqi if agent is not supplied.', async function (t) {
   const client = new ReqiClient()
   const requestOptions = { url: server.url }
 
-  client.request(requestOptions).then((response) => {
-    const actual = response.requestOptions.agent.constructor.name
-    const expected = 'Agent'
+  let res
+  try {
+    res = await client.request(requestOptions)
+  } catch (error) {
+    res = error
+  }
 
-    t.equals(actual, expected)
-    t.end()
-  }).catch((error) => {
-    t.fail(error)
-    t.end()
-  })
+  const actual = (res && res.requestOptions && res.requestOptions.agent) ? res.requestOptions.agent.constructor.name : res
+  const expected = 'Agent'
+
+  t.equals(actual, expected)
+  t.end()
 })
 
-tape('agent should not be set by Reqi if agent is false.', function (t) {
+tape('agent should not be set by Reqi if agent is false.', async function (t) {
   const client = new ReqiClient()
   const requestOptions = { agent: false, url: server.url }
 
-  client.request(requestOptions).then((response) => {
-    const actual = response.requestOptions.agent
-    const expected = false
+  let res
+  try {
+    res = await client.request(requestOptions)
+  } catch (error) {
+    res = error
+  }
 
-    t.equals(actual, expected)
-    t.end()
-  }).catch((error) => {
-    t.fail(error)
-    t.end()
-  })
+  const actual = (res && res.requestOptions) ? res.requestOptions.agent : res
+  const expected = false
+
+  t.equals(actual, expected)
+  t.end()
 })
 
-tape('request should return error on invalid agent.', function (t) {
+tape('request should return error on invalid agent.', async function (t) {
   const client = new ReqiClient()
   const requestOptions = { agent: 'string-agent', url: server.url }
 
-  client.request(requestOptions).then((response) => {
-    t.fail(response)
-    t.end()
-  }).catch((error) => {
-    const actual = error
-    const expected = new ReqiError('The "options.agent" property must be one of type Agent-like Object, undefined, or false.')
+  let res
+  try {
+    res = await client.request(requestOptions)
+  } catch (error) {
+    res = error
+  }
 
-    t.deepEquals(actual, expected)
-    t.end()
-  })
+  const actual = res
+  const expected = new ReqiError('The "options.agent" property must be one of type Agent-like Object, undefined, or false.')
+
+  t.deepEqual(actual, expected)
+  t.end()
 })
 
 tape('cleanup', function (t) {
