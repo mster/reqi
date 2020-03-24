@@ -45,7 +45,6 @@ Creates a new client with the supplied `clientOptions` overriding defaults.
 
 ## request(requestOptions[, body=null])
 * `requestOptions`: `<Object>` See [requestOptions](#requestOptions)
-  * `url`: `<string>` | `<URL>` A parsable WHATWG input URL, or URL class.
 * `body`: `<Object>` | `<string>` | `<Buffer>` | `<stream>` An acceptable request body.
 
 ## request(url[, body=null])
@@ -107,4 +106,4 @@ For more information on the supported `requestOptions`, consult the following No
 [Contributing via DCO 1.1](contributing.md).
 
 # License
-Licensed under the MIT License. See the [LICENSE](license.md) file for more details.
+Licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
