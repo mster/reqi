@@ -18,7 +18,7 @@ tape('setup', function (t) {
   })
 })
 
-tape('test https request', function (t) {
+tape('test https request', async function (t) {
   const basePath = path.join(__dirname, '..', 'ssl')
   const client = new ReqiClient()
   const requestOptions = {
@@ -27,13 +27,15 @@ tape('test https request', function (t) {
     cert: fs.readFileSync(path.join(basePath, '..', 'ssl', 'client.crt')),
     ca: fs.readFileSync(path.join(basePath, '..', 'ssl', 'ca.crt'))
   }
-  client.request(requestOptions).then((response) => {
-    t.equal(200, response.statusCode)
+  let response
+  try {
+    response = await client.request(requestOptions)
+    t.equal(response.statusCode, 200)
     t.end()
-  }).catch((error) => {
+  } catch (error) {
     t.fail(error)
     t.end()
-  })
+  }
 })
 
 tape('cleanup', function (t) {
