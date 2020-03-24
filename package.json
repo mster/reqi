@@ -1,11 +1,8 @@
 {
   "name": "reqi",
   "version": "0.0.0",
-  "description": "Node promisified HTTP/HTTPS client requests with retries.",
+  "description": "Node.js Promisified Request Library with retry and redirect support.",
   "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
   "scripts": {
     "lint": "echo \"Running Lint...\" && standard --verbose && echo \"Lint Successful!\"",
     "test": "npm run lint && npm run unit && npm run integration",
