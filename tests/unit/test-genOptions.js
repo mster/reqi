@@ -47,9 +47,40 @@ tape('generateOptions should return options if given valid requestOptions and ad
     protocol: 'https:',
     method: 'GET',
     url: 'https://google.com/test',
+    host: 'google.com',
     hostname: 'google.com',
     port: 443,
     path: '/test',
+    headers: {},
+    agent: httpsAgent,
+    reqCount: { retry: 0, redirect: 0 },
+    id: '000000'
+  }
+
+  const actual = generateOptions(requestOptions)
+  const expected = options
+  t.deepEqual(actual, expected)
+  t.end()
+})
+
+tape('generateOptions should return options with correctly formatted path', function (t) {
+  const transport = require('https')
+  const httpsAgent = new transport.Agent({ id: '666' })
+
+  const requestOptions = {
+    url: 'https://google.com/api/detail.json?item=2',
+    id: '000000',
+    agent: httpsAgent
+  }
+
+  const options = {
+    protocol: 'https:',
+    method: 'GET',
+    url: 'https://google.com/api/detail.json?item=2',
+    host: 'google.com',
+    hostname: 'google.com',
+    port: 443,
+    path: '/api/detail.json?item=2',
     headers: {},
     agent: httpsAgent,
     reqCount: { retry: 0, redirect: 0 },
