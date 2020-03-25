@@ -103,7 +103,7 @@ For more information on the supported `requestOptions`, consult the following No
 * [Core TLS (SSL)](https://nodejs.org/api/tls.html#tls_tls_connect_options_callback) 
 
 # Contributing
-[Contributing via DCO 1.1](contributing.md).
+[Contributing via DCO 1.1](https://github.com/mster/reqi/blob/v1.0.2/contributing.md).
 
 # License
-Licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+Licensed under the MIT License. See the [LICENSE](https://github.com/mster/reqi/blob/v1.0.2/LICENSE) file for more details.
