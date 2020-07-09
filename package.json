@@ -1,7 +1,7 @@
 {
   "name": "reqi",
-  "version": "1.0.3",
-  "description": "Node promisified HTTP/HTTPS client requests with retries.",
+  "version": "1.0.4",
+  "description": "Promisified request library with built in functionality for retries, redirects, and body parsing.",
   "keywords": [
     "http",
     "https",
