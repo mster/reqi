@@ -1,6 +1,6 @@
 {
   "name": "reqi",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Promisified request library with built in functionality for retries, redirects, and body parsing.",
   "keywords": [
     "http",
